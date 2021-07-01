@@ -330,11 +330,63 @@ void VideoPlayer::showPlaylist(const std::string& playlistName) {
 //this challenge otherwise.
 void VideoPlayer::removeFromPlaylist(const std::string& playlistName,
                                      const std::string& videoId) {
-  std::cout << "removeFromPlaylist needs implementation" << std::endl;
+    if (playlists.size() == 0) {
+        std::cout << "Cannot remove video from " + playlistName + ": Playlist does not exist\n";
+        return;
+    }
+
+    std::string title = "";
+    int id = -1;
+    for (int i = 0; i < playlists.size(); i++) {
+        if (playlists[i].size() != playlistName.size()) {
+            continue;
+        }
+
+        std::string str = playlists[i];
+        for (int j = 0; j < str.size(); j++) {
+            if (tolower(str[j]) == tolower(playlistName[j])) {
+                if (j == str.size() - 1) {
+                    title = playlists[i];
+                    id = i;
+                    break;
+                }
+            }
+        }
+    }
+    if (title == "") {
+        std::cout << "Cannot remove video from " + playlistName + ": Playlist does not exist\n";
+        return;
+    }
 }
 
 void VideoPlayer::clearPlaylist(const std::string& playlistName) {
-  std::cout << "clearPlaylist needs implementation" << std::endl;
+    if (playlists.size() == 0) {
+        std::cout << "Cannot clear playlist " + playlistName + ": Playlist does not exist\n";
+        return;
+    }
+
+    std::string title = "";
+    int id = -1;
+    for (int i = 0; i < playlists.size(); i++) {
+        if (playlists[i].size() != playlistName.size()) {
+            continue;
+        }
+
+        std::string str = playlists[i];
+        for (int j = 0; j < str.size(); j++) {
+            if (tolower(str[j]) == tolower(playlistName[j])) {
+                if (j == str.size() - 1) {
+                    title = playlists[i];
+                    id = i;
+                    break;
+                }
+            }
+        }
+    }
+    if (title == "") {
+        std::cout << "Cannot clear playlist " + playlistName + ": Playlist does not exist\n";
+        return;
+    }
 }
 
 void VideoPlayer::deletePlaylist(const std::string& playlistName) {
